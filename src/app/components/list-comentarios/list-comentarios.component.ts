@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComentarioService } from 'src/app/services/comentario.service';
 import { Comentario } from 'src/interfaces/Comentario';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-comentarios',
@@ -11,7 +12,7 @@ export class ListComentariosComponent implements OnInit {
 
  listComentarios: Comentario[]=[];
 
-  constructor(private _comentarioService: ComentarioService) { }
+  constructor(private _comentarioService: ComentarioService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getComentarios();
@@ -28,8 +29,8 @@ getComentarios(){
   eliminarComentario(id: any){
       console.log(id);
       this._comentarioService.deleteComentario(id).subscribe(
-        data => {
-          this.getComentarios();
+        () => {this.toastr.warning('El comentario fue eliminado con exito', 'Comentario Eliminado');
+          this.getComentarios()
         },
         error => {
           console.log(error);

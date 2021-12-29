@@ -36,9 +36,9 @@ this.id = +this.aRoute.snapshot.paramMap.get('id')!;
   }
 
   esEditar(){
-    if(this.id !== 0) {
+    if (this.id !== 0) {
       this.accion = 'Editar';
-      this._comentarioService.getComentario(this.id).subscribe((data:any) => {
+      this._comentarioService.getComentario(this.id).subscribe((data: any) => {
         this.comentario = data;
         this.agregarComentario.patchValue({
           titulo: data.titulo,
@@ -65,9 +65,9 @@ this.id = +this.aRoute.snapshot.paramMap.get('id')!;
       fechaCreacion: new Date
 
     }
-    this._comentarioService.saveComentario(comentario).subscribe(data =>{
+    this._comentarioService.saveComentario(comentario).subscribe(() => {
       this.toastr.success('El comentario fue registrado con exito', 'Comentario registrado');
-         this.router.navigate(['/']);
+      this.router.navigate(['/']);
     },
     error =>{
       this.toastr.error('Opss Ocurrio un error!','Error');
@@ -83,7 +83,7 @@ this.id = +this.aRoute.snapshot.paramMap.get('id')!;
       fechaCreacion: this.comentario.fechaCreacion
 
     }
-      this._comentarioService.updateComentario(this.id, comentario).subscribe( data =>{
+      this._comentarioService.updateComentario(this.id, comentario).subscribe( () =>{
         this.toastr.info('El comentario fue actualizado con exito', 'Comentario actualizado');
         this.router.navigate(['/']);
       },
@@ -92,7 +92,7 @@ this.id = +this.aRoute.snapshot.paramMap.get('id')!;
         console.log(error)
       })
 
-     
+
   }
 
 
